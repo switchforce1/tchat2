@@ -1,0 +1,17 @@
+{
+    "name": "switchforce1/tchat2",
+    "description": "Test tchat php mvc without Framework",
+    "require": {
+        "php": ">=7.0"
+    },
+    "authors": [
+        {
+            "name": "switchforce1",
+            "email": "switchforce1@gmail.com"
+        }
+    ],
+    "autoload":{
+            "psr-4":{"Tchat2\\":"src/"}
+    },
+    "minimum-stability": "dev"
+}
