@@ -8,9 +8,10 @@ namespace Tchat2\Model;
  */
 abstract class AbstractModel implements ModelInterface
 {
-    
     /**
      * Return the entity table name
+     * 
+     * @return string 
      */
     public function getTableName()
     {
@@ -18,36 +19,4 @@ abstract class AbstractModel implements ModelInterface
         
         return strtolower($className);
     }
-
-    /**
-     * Gets the id
-     * 
-     * @return int
-     */
-    public abstract function getId();
-    
-    /**
-     * 
-     * @return true 
-     */
-    public function delete()
-    {
-        
-    }
-
-    /**
-     * 
-     * @return \Tchat2\Model\ModelInterface $model
-     */
-    public function save()
-    {
-        if($this->getId()){
-            $this->update($this);
-        }else{
-            $this->create($this);
-        }
-        
-        return $this;
-    }
-
 }

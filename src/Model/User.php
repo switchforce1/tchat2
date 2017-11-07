@@ -102,24 +102,4 @@ class User extends AbstractModel implements ModelInterface
         $this->password = $password;
         return $this;
     }
-
-    /**
-     * 
-     * @param \Tchat2\Model\ModelInterface $model
-     */    
-    public function create()
-    {
-        
-    }
-
-    /**
-     * 
-     * @param \Tchat2\Model\ModelInterface $model
-     * 
-     * @return User
-     */
-    public function update()
-    {
-        
-    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tchat2\Repository;
+namespace Tchat2\Model\Repository;
 
 use Tchat2\Helper\SQLHelper;
 use Tchat2\Model\Message;
@@ -87,7 +87,12 @@ class MessageRepository extends AbstractRepository implements RepositoryInterfac
         return parent::findBy($array, self::getTableName());
     }
     
-    
+    /**
+     * 
+     * @param type $sender
+     * @param type $receiver
+     * @return type
+     */
     public function findItemOf($sender, $receiver = null)
     {
         $query = "select * from message WHERE sender ='".
@@ -101,5 +106,28 @@ class MessageRepository extends AbstractRepository implements RepositoryInterfac
         
         return $result->fetchAll(\PDO::FETCH_CLASS, $this->getClassName());
     }
-    
+
+    /**
+     * 
+     * @param Message $message
+     */
+    public function create(Message $message)
+    {
+        $query = "INSERT INTO message (content, sender, receiver)
+        VALUES ('".$message->getContent()."', '".$message->getSender()."',"
+            . " '".$message->getReceiver()."')";
+        
+        DataBaseConnexion::getConnexion()->exec($query);
+        
+    }
+
+    /**
+     * 
+     * @param \Tchat2\Model\Message $message
+     */
+    public function update(Message $message)
+    {
+        
+    }
+
 }

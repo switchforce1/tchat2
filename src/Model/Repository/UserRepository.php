@@ -1,5 +1,5 @@
 <?php
-namespace Tchat2\Repository;
+namespace Tchat2\Model\Repository;
 
 use Tchat2\Helper\SQLHelper;
 use Tchat2\Model\User;
@@ -99,4 +99,32 @@ class UserRepository extends AbstractRepository implements RepositoryInterface
         
         return count($data)== 0?false:true;
     }
+    
+    /**
+     * 
+     * @param User $user
+     */
+    public function create(User $user)
+    {
+        $query = "INSERT INTO user (name, login, password)
+        VALUES ('".$user->getName()."', '".$user->getLogin()."',"
+            . " '".$user->getPassword()."')";
+        
+        DataBaseConnexion::getConnexion()->exec($query);       
+    }
+
+    /**
+     * 
+     * @param \Tchat2\Model\User $user
+     */
+    public function update(User $user)
+    {
+        $query = "UPDATE user SET ".
+            " name='".$user->getName()."'".
+            " login ='".$user->getLogin()."'".
+            "WHERE id=".$user->getId().";";
+        
+        DataBaseConnexion::getConnexion()->exec($query);
+    }
+
 }

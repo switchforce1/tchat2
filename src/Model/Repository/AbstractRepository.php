@@ -1,9 +1,10 @@
 <?php
 
-namespace Tchat2\Repository;
+namespace Tchat2\Model\Repository;
 
 use Tchat2\Config\DataBaseConnexion;
 use Tchat2\Helper\SQLHelper;
+use Tchat2\Model\ModelInterface;
 
 /**
  * Description of AbstractRepository
@@ -77,5 +78,33 @@ abstract class AbstractRepository implements RepositoryInterface
         $result->execute();
         
         return $result->fetchAll(\PDO::FETCH_CLASS, $this->getClassName());
+    }
+    
+    /**
+     * 
+     * @param ModelInterface $model
+     * 
+     * @return ModelInterface $model
+     */
+    public function save(ModelInterface $model)
+    {
+        if($model->getId()){
+            $model->update($model);
+        }else{
+            $model->create($model);
+        }
+        
+        return $model;
+    }
+    
+    /**
+     * 
+     * @param integer $id
+     */
+    public function delete($id)
+    {
+        $query = "DELETE FROM message WHERE id=".$id.";";
+        
+        return DataBaseConnexion::getConnexion()->exec($query);
     }
 }

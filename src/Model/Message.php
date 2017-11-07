@@ -1,14 +1,13 @@
 <?php
 namespace Tchat2\Model;
 
-use Tchat2\Config\DataBaseConnexion;
 
 /**
  * Message Class
  *
  * @author switchforce1
  */
-class Message extends AbstractModel
+class Message extends AbstractModel implements ModelInterface
 {
     /**
      *
@@ -45,7 +44,7 @@ class Message extends AbstractModel
 
     /**
      * 
-     * @return type
+     * @return  string
      */
     public function getContent()
     {
@@ -54,8 +53,8 @@ class Message extends AbstractModel
 
     /**
      * 
-     * @param type $content
-     * @return $this
+     * @param   string $content
+     * @return  $this
      */
     public function setContent($content)
     {
@@ -103,27 +102,4 @@ class Message extends AbstractModel
         $this->receiver = $receiver;
         return $this;
     }
-
-    /**
-     * 
-     * @param \Tchat2\Model\ModelInterface $model
-     */
-    public function create()
-    {
-        $query = "INSERT INTO message (content, sender, receiver)
-        VALUES ('".$this->getContent()."', '".$this->getSender()."',"
-            . " '".$this->getReceiver()."')";
-        
-        DataBaseConnexion::getConnexion()->exec($query);
-    }
-
-    /**
-     * 
-     * @param \Tchat2\Model\ModelInterface $model
-     */
-    public function update()
-    {
-        
-    }
-
 }

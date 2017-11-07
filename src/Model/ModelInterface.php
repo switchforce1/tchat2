@@ -1,4 +1,5 @@
 <?php
+
 namespace Tchat2\Model;
 
 /**
@@ -7,28 +8,10 @@ namespace Tchat2\Model;
  */
 interface ModelInterface
 {
-    //put your code here
     /**
+     * Return the entity table name
      * 
-     * @param ModelInterface $model
+     * @return string 
      */
-    public function create();
-    
-    /**
-     * 
-     * @param ModelInterface $model
-     */
-    public function save();
-    
-    /**
-     * 
-     * @param ModelInterface $model
-     */
-    public function update();
-    
-    /**
-     * 
-     * @param ModelInterface $model
-     */
-    public function delete();
+    public function getTableName();
 }

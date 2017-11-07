@@ -1,6 +1,6 @@
 <?php
 require 'vendor/autoload.php';
-use Tchat2\Repository\UserRepository;
+use Tchat2\Model\Repository\UserRepository;
 
 if(isset($_POST['login']) && isset($_POST['password'])){
     $login = $_POST['login'];

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <?php
 require 'vendor/autoload.php';
-use Tchat2\Repository\UserRepository;
-use Tchat2\Repository\MessageRepository;
+use Tchat2\Model\Repository\UserRepository;
+use Tchat2\Model\Repository\MessageRepository;
 use Tchat2\Helper\HtmlRender;
 use Tchat2\Form\MessageForm;
 
