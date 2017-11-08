@@ -2,7 +2,7 @@
 
 namespace Tchat2\Router;
 
-use App\Exception\NoRouteFoundException;
+use Tchat2\Exception\RouterException;
 
 /**
  * Description of Router
@@ -11,8 +11,15 @@ use App\Exception\NoRouteFoundException;
  */
 class Router
 {
+    /*
+     * 
+     */
     private $url;
     
+    /**
+     *
+     * @var type 
+     */
     private $routes = array();
     
     /**
@@ -33,10 +40,7 @@ class Router
      */
     public function get($path, $callable)
     {
-        $route = new Route($path, $callable);
-        
-        //add new route
-        $this->routes['GET'][] = $route;
+        return $this->add($path, $callable, 'GET');
     }
     
     /**
@@ -47,29 +51,55 @@ class Router
      */
     public function post($path, $callable)
     {
-        $route = new Route($path, $callable);
-        
-        //add new route
-        $this->routes['POST'][] = $route;
+        return $this->add($path, $callable, 'POST');
     }
     
+    /**
+     * 
+     * @param type $path
+     * @param type $callable
+     * @param type $method
+     * 
+     * @return \Tchat2\Router\Route
+     */
+    private function add($path, $callable, $method)
+    {
+        $route = new Route($path, $callable);        
+        //add new route
+        $this->routes[$method][] = $route;
+        
+        return $route;
+    }
+
+
     public function run()
     {
         //Check if the routes array contains the current method
         if(!isset($this->routes[$_SERVER['REQUEST_METHOD']])){
-            throw new NoRouteFoundException("The method not exist");
+            throw new RouterException("The method not exist");
         }
-               
+        //print_r($this->routes) ;
+        
         foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route){
-            print("\n \n");
+            $url = str_replace("index.php", "", $this->url);
+            if ($_SERVER['REQUEST_METHOD'] == "POST"){
+                $url.="/".$this->postSubUrl();
+            }
             //if the route match
-            if($route->match($this->url)){
+            if($route->match($url)){
                 //execute the request
-                $route->call();
+                return $route->call();
             }
         }
         
-        throw new NoRouteFoundException("the url not mathing");
-        
+        throw new RouterException("the url not mathing");        
+    }
+    
+    /**
+     * Post value with slashes
+     */
+    private function postSubUrl()
+    {
+       return implode("/", $_POST);
     }
 }

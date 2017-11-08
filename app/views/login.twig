@@ -1,0 +1,42 @@
+{# empty Twig template #}
+{# empty Twig template #}
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content=" tchat">
+        <meta name="author" content="">
+
+        <title>T-chat</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="../../src/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    </head>
+
+    <body>
+        <div class="jumbotron text-center">
+         <h1>Tchat</h1>
+         <p>Site de chat de test</p>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                </div>
+              <div class="col-sm-4">
+                    <h3>Authentification</h3>
+                    <h4> 
+                    {%if message %} {{message}}{% endif %}
+                    </h4>
+                    <form method="post" action="/">
+                        <input type="text" class="form-control" name="login" required="true" /> <br/>
+                        <input type="password" name="password" class="form-control" required="true"/> <br/>
+                        <input type="submit" value="Connexion" class="btn btn-control">
+                    </form>
+              </div>
+              <div class="col-sm-4">
+              </div>
+            </div>
+        </div> 
+    </body>
+</html>    

@@ -111,7 +111,7 @@ class MessageRepository extends AbstractRepository implements RepositoryInterfac
      * 
      * @param Message $message
      */
-    public function create(Message $message)
+    public function create($message)
     {
         $query = "INSERT INTO message (content, sender, receiver)
         VALUES ('".$message->getContent()."', '".$message->getSender()."',"
@@ -125,7 +125,7 @@ class MessageRepository extends AbstractRepository implements RepositoryInterfac
      * 
      * @param \Tchat2\Model\Message $message
      */
-    public function update(Message $message)
+    public function update($message)
     {
         
     }

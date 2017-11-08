@@ -86,12 +86,12 @@ abstract class AbstractRepository implements RepositoryInterface
      * 
      * @return ModelInterface $model
      */
-    public function save(ModelInterface $model)
+    public function save($model)
     {
         if($model->getId()){
-            $model->update($model);
+            $this->update($model);
         }else{
-            $model->create($model);
+            $this->create($model);
         }
         
         return $model;

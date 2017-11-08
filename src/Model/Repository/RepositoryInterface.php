@@ -46,21 +46,21 @@ interface RepositoryInterface
      * 
      * @param ModelInterface $model
      */
-    public function create(ModelInterface $model);
+    public function create($model);
     
     /**
      * Save the model
      * 
      * @param ModelInterface $model
      */
-    public function save(ModelInterface $model);
+    public function save($model);
     
     /**
      * Update the model
      * 
      * @param ModelInterface $model
      */
-    public function update(ModelInterface $model);
+    public function update($model);
     
     /**
      * Delete the model by the given id

@@ -24,6 +24,12 @@ class Route
     private $callable;
     
     /**
+     *
+     * @var array 
+     */
+    private $matches = array();
+    
+    /**
      * The constructor.
      * 
      * @param type $path
@@ -42,21 +48,35 @@ class Route
      */
     public function match($url)
     {
-        $url = trim($url, "/");
-        //Replace parameters in the url
-        $path = preg_replace("#:([\w]+)#","([^/]+)", $this->path);
-        
-        //regex from the begining(^) to the end($)
-        $regex = "#^$path$#";
-        var_dump( "\n** * *Regex **** ".$regex);
-        var_dump( "\n** * *Url **** ".$url);
+        $url = trim($url, '/');
+        $path = preg_replace('#:([\w]+)#', '([^/]+)', $this->path);
+        $regex = "#^$path$#i";
         if(!preg_match($regex, $url, $matches)){
             return false;
         }
-        var_dump( "** * * **** ".$regex);
+        //print_r($matches,true);
         
-        var_dump($matches);
+        array_shift($matches);
+        $this->matches = $matches;
         return true;
+    }
+    /**
+     * Call the request action
+     * 
+     * @return 
+     */
+    public function call()
+    { 
+        if(is_string($this->callable)){
+            $params = explode('#', $this->callable);
+            $controller = "Tchat2\\Controller\\" . ucfirst($params[0]) . "Controller";
+            $controller = new $controller();
+            $action = $params[1].'Action';
+            return call_user_func_array([$controller, $action], $this->matches);
+        } else {
+            return call_user_func_array($this->callable, $this->matches);
+        }
+
     }
     
 }

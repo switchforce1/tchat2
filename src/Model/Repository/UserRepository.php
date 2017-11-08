@@ -104,7 +104,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface
      * 
      * @param User $user
      */
-    public function create(User $user)
+    public function create($user)
     {
         $query = "INSERT INTO user (name, login, password)
         VALUES ('".$user->getName()."', '".$user->getLogin()."',"
@@ -117,7 +117,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface
      * 
      * @param \Tchat2\Model\User $user
      */
-    public function update(User $user)
+    public function update($user)
     {
         $query = "UPDATE user SET ".
             " name='".$user->getName()."'".

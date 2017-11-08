@@ -1,13 +1,11 @@
 <?php
 
-$router->get('posts/', function (){ 
-    echo 'Voici la liste des posts';
-});
-$router->get('post/:id', function ($id) {
-    echo 'Voici le post N '.$id;
-});
+$router->get('/', "chat#index");
 
-$router->get('post/:id', function ($id) {
-    echo 'Voici la validation pour le post N '.$id;
-});
+$router->get('/:sender',"chat#sender");
 
+$router->get('/:sender/:message', "chat#message");
+
+$router->post('/:sender/:receiver/:content', "chat#send");
+
+$router->post('/:login/:password', "login#login");
